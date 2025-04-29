@@ -107,6 +107,7 @@ export const ReportCard = ({ title, description }) => {
         margin: "20px auto",
         position: "relative",
         minHeight: "20rem",
+        minWidth: 300,
       }}
     >
       <CardContent>
