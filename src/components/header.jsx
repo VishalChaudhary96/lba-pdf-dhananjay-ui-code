@@ -7,18 +7,36 @@ export const Header = () => {
       <Paper
         elevation={1}
         sx={{
-          padding: "0 1rem 1rem 1rem",
           borderTop: "1px solid  rgb(229, 231, 235)", // Top border
           borderBottom: "1px solid  rgb(229, 231, 235)", // Bottom border
+          padding: { xs: "1rem", md: "1rem" },
+          textAlign: { xs: "center" },
         }}
       >
         <Typography
           variant="h4"
-          sx={{ margin: "1rem 1rem 0 1rem", fontWeight: "bold" }}
+          margin={{
+            xs: "0 0 0 0.5rem",
+            sm: "0 1rem 0 1rem",
+          }}
+          sx={{
+            fontWeight: "bold",
+          }}
         >
-          Report
+          Reports
         </Typography>
-        <Typography variant="p" sx={{ margin: "0 1rem" }}>
+        <Typography
+          variant="p"
+          margin={{
+            xs: "0 0 0 0.5rem",
+            sm: "0 0 0 1rem",
+          }}
+          sx={{
+            xs: {
+              fontSize: "0.1rem",
+            },
+          }}
+        >
           Easily manage reports for your customers.
         </Typography>
       </Paper>
