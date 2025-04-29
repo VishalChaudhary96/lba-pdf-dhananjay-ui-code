@@ -13,6 +13,7 @@ import { fetchReport } from "../utils";
 export const ReportCard = ({ title, description }) => {
   const [dateRange, setDateRange] = useState({ from: "", to: "" });
   const [errors, setErrors] = useState({ from: false, to: false });
+  const [hideButton, setHideButton] = useState(false);
 
   const handleDateChange = (e) => {
     const { name, value } = e.target;
@@ -55,6 +56,7 @@ export const ReportCard = ({ title, description }) => {
 
   const handleSubmit = () => {
     if (validateDates()) {
+      setHideButton(true);
       // alert(`Date range selected: From ${dateRange.from} to ${dateRange.to}`);
       switch (title) {
         case "Balance Sheet Report":
@@ -62,23 +64,34 @@ export const ReportCard = ({ title, description }) => {
             "/report/download/balance-sheet",
             dateRange,
             "Balance Sheet Report"
-          );
+          )
+            .then(() => setHideButton(false))
+            .catch((error) => console.log("error", error));
           break;
         case "Trips Report":
-          fetchReport("/report/download/trips", dateRange, "Trips Report");
+          fetchReport("/report/download/trips", dateRange, "Trips Report").then(
+            () =>
+              setHideButton(false).catch((error) => console.log("error", error))
+          );
           break;
         case "Net P&L Report":
           fetchReport(
             "/report/download/net-profit-n-loss",
             dateRange,
             "Net P&L Report"
-          );
+          )
+            .then(() => setHideButton(false))
+            .catch((error) => console.log("error", error));
           break;
         case "Income Report":
-          fetchReport("/report/download/income", dateRange, "Income Report");
+          fetchReport("/report/download/income", dateRange, "Income Report")
+            .then(() => setHideButton(false))
+            .catch((error) => console.log("error", error));
           break;
         case "Expense Report":
-          fetchReport("/report/download/expense", dateRange, "Expense Report");
+          fetchReport("/report/download/expense", dateRange, "Expense Report")
+            .then(() => setHideButton(false))
+            .catch((error) => console.log("error", error));
           break;
         default:
           return;
@@ -147,6 +160,7 @@ export const ReportCard = ({ title, description }) => {
           />
         </Box>
         <Button
+          disabled={hideButton}
           sx={{
             position: "absolute",
             bottom: "0.9rem", // Positioning from the bottom edge

@@ -1,8 +1,4 @@
 export async function fetchReport(route, dateRange, reportName) {
-  console.log(
-    "process.env.REACT_APP_BACKEND_SERVER_URL + route ",
-    process.env.REACT_APP_BACKEND_SERVER_URL + route
-  );
   try {
     const response = await fetch(
       process.env.REACT_APP_BACKEND_SERVER_URL + route,
@@ -36,7 +32,6 @@ export async function fetchReport(route, dateRange, reportName) {
     window.URL.revokeObjectURL(url);
 
     // const result = await response.json();
-    // console.log("Success:", result);
   } catch (error) {
     console.error("Error downloading PDF:", error.message);
   }
