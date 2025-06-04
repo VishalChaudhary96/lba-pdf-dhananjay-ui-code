@@ -97,17 +97,20 @@ export const ReportCard = ({ title, description, type }) => {
     <Card
       variant="outlined"
       sx={{
-        maxWidth: {
-          xs: "21rem",
-          sm: "22rem",
-        },
-        margin: "auto auto",
         position: "relative",
         minHeight: {
           xs: "20rem",
           sm: "20rem",
           md: "26rem",
         },
+        width: {
+          xs: "90vw",
+          sm: "50vw",
+        },
+        maxWidth: {
+          sm: "22rem",
+        },
+        margin: "0 auto",
       }}
     >
       <CardContent>
@@ -159,7 +162,7 @@ export const ReportCard = ({ title, description, type }) => {
             }}
           />
           {/* "Vehicle Number" */}
-          {showVehicleNumberInput ? (
+          {showVehicleNumberInput && (
             <TextField
               variant="outlined"
               fullWidth
@@ -170,8 +173,6 @@ export const ReportCard = ({ title, description, type }) => {
               onChange={handlevehicleNumberChange}
               margin="normal"
             />
-          ) : (
-            ""
           )}
         </Box>
         <Button
