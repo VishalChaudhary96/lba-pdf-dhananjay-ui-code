@@ -31,8 +31,10 @@ export const ReportCard = ({ title, description, type }) => {
       [name]: value,
     }));
   };
-  const handlevehicleNumberChange = (e) =>
-    setVehicleNumber(e.target.value.toUpperCase());
+  const handlevehicleNumberChange = (e) => {
+    const number = e.target.value.toUpperCase().split(" ").join("");
+    setVehicleNumber(number);
+  };
 
   const validateDates = () => {
     const { from, to } = dateRange;
@@ -61,7 +63,6 @@ export const ReportCard = ({ title, description, type }) => {
   const handleSubmit = () => {
     if (validateDates()) {
       setHideButton(true);
-      // alert(`Date range selected: From ${dateRange.from} to ${dateRange.to}`);
       switch (title) {
         case "Balance Sheet Report":
           fetchReport(
