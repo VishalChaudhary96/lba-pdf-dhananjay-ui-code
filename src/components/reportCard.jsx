@@ -10,10 +10,12 @@ import {
 import { useState } from "react";
 import { fetchReport } from "../utils";
 
-export const ReportCard = ({ title, description }) => {
+export const ReportCard = ({ title, description, type }) => {
   const [dateRange, setDateRange] = useState({ from: "", to: "" });
   const [errors, setErrors] = useState({ from: false, to: false });
   const [hideButton, setHideButton] = useState(false);
+  const [vehicleNumber, setVehicleNumber] = useState("");
+  const showVehicleNumberInput = type === "profitNLoss" ? true : false;
 
   const handleDateChange = (e) => {
     const { name, value } = e.target;
@@ -29,6 +31,8 @@ export const ReportCard = ({ title, description }) => {
       [name]: value,
     }));
   };
+  const handlevehicleNumberChange = (e) =>
+    setVehicleNumber(e.target.value.toUpperCase());
 
   const validateDates = () => {
     const { from, to } = dateRange;
@@ -68,7 +72,7 @@ export const ReportCard = ({ title, description }) => {
             .then(() => setHideButton(false))
             .catch((error) => console.log("error", error));
           break;
-        case "Trips Report":
+        case "Invoice":
           fetchReport("/report/download/trips", dateRange, "Trips Report").then(
             () =>
               setHideButton(false).catch((error) => console.log("error", error))
@@ -77,19 +81,9 @@ export const ReportCard = ({ title, description }) => {
         case "Net P&L Report":
           fetchReport(
             "/report/download/net-profit-n-loss",
-            dateRange,
+            { ...dateRange, vehicleNumber },
             "Net P&L Report"
           )
-            .then(() => setHideButton(false))
-            .catch((error) => console.log("error", error));
-          break;
-        case "Income Report":
-          fetchReport("/report/download/income", dateRange, "Income Report")
-            .then(() => setHideButton(false))
-            .catch((error) => console.log("error", error));
-          break;
-        case "Expense Report":
-          fetchReport("/report/download/expense", dateRange, "Expense Report")
             .then(() => setHideButton(false))
             .catch((error) => console.log("error", error));
           break;
@@ -102,12 +96,18 @@ export const ReportCard = ({ title, description }) => {
   return (
     <Card
       variant="outlined"
-      style={{
-        maxWidth: 600,
-        margin: "20px auto",
+      sx={{
+        maxWidth: {
+          xs: "21rem",
+          sm: "22rem",
+        },
+        margin: "auto auto",
         position: "relative",
-        minHeight: "20rem",
-        minWidth: 300,
+        minHeight: {
+          xs: "20rem",
+          sm: "20rem",
+          md: "26rem",
+        },
       }}
     >
       <CardContent>
@@ -118,11 +118,10 @@ export const ReportCard = ({ title, description }) => {
           {description}
         </Typography>
 
-        <Box mt={2} mb={2}>
+        <Box mt={2} mb={4}>
           <Typography variant="body2" color="textPrimary">
             Pick a date range
           </Typography>
-
           {/* "From" Date */}
           <TextField
             variant="outlined"
@@ -159,12 +158,27 @@ export const ReportCard = ({ title, description }) => {
               },
             }}
           />
+          {/* "Vehicle Number" */}
+          {showVehicleNumberInput ? (
+            <TextField
+              variant="outlined"
+              fullWidth
+              label="Vehicle number"
+              type="text"
+              name="vehicleNumber"
+              value={vehicleNumber}
+              onChange={handlevehicleNumberChange}
+              margin="normal"
+            />
+          ) : (
+            ""
+          )}
         </Box>
         <Button
           disabled={hideButton}
           sx={{
             position: "absolute",
-            bottom: "0.9rem", // Positioning from the bottom edge
+            bottom: "0.7rem", // Positioning from the bottom edge
             right: "1rem", // Positioning from the right edge
           }}
           variant="contained"

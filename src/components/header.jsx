@@ -5,10 +5,10 @@ export const Header = () => {
   return (
     <header className="App-header">
       <Paper
-        elevation={1}
+        elevation={0}
         sx={{
           borderTop: "1px solid  rgb(229, 231, 235)", // Top border
-          borderBottom: "1px solid  rgb(229, 231, 235)", // Bottom border
+          borderBottom: "2px solid  rgb(229, 231, 235)", // Bottom border
           padding: { xs: "1rem", md: "1rem" },
           textAlign: { xs: "center" },
         }}

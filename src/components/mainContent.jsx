@@ -4,48 +4,27 @@ import { ReportCard } from "./index";
 
 export const MainContent = () => {
   return (
-    <Container
-      sx={{
-        xs: {
-          margin: "0",
-        },
-        sm: {
-          margin: "1rem",
-        },
-      }}
-    >
+    <Container sx={{ marginTop: "1rem" }}>
       <Grid container spacing={2} justifyContent={"center"}>
-        {/* First Row */}
-        <Grid item xs={12} sm={6}>
-          <ReportCard
-            title={"Trips Report"}
-            description={"Export the trips report"}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <ReportCard
-            title={"Net P&L Report"}
-            description={"Export the net profit and loss report"}
-          />
-        </Grid>
-
-        {/* Second Row */}
-        <Grid item xs={12} sm={6}>
-          <ReportCard
-            title={"Income Report"}
-            description={"Export the income Report"}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <ReportCard
-            title={"Expense Report"}
-            description={"Export the expense Report"}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={3}>
           <ReportCard
             title={"Balance Sheet Report"}
             description={"Export the balance Sheet Report"}
+            type={"balanceSheet"}
+          />
+        </Grid>
+        <Grid item xs={12} sm={3}>
+          <ReportCard
+            title={"Invoice"}
+            description={"Generate Invoice"}
+            type={"invoice"}
+          />
+        </Grid>
+        <Grid item xs={12} sm={3}>
+          <ReportCard
+            title={"Net P&L Report"}
+            description={"Export the net profit and loss report"}
+            type={"profitNLoss"}
           />
         </Grid>
       </Grid>
